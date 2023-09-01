@@ -23,7 +23,7 @@ public class PeliculaController {
     private RestTemplate restTemplate;
 
     public UriComponentsBuilder Api_movie(String text) {
-        String apiUrl = "https://api.themoviedb.org/3/search/multi";  // URL del API Movie
+        String apiUrl = "https://api.themoviedb.org/3/search/multi";  // URL del API Movie.
 
         //  'api_key': '3e56846ee7cfb0b7d870484a9f66218c'
         // 'query'
@@ -33,7 +33,7 @@ public class PeliculaController {
         return builder;
     }
 
-    // TODO buscar del listado la primera que sea pelicula (media_type == 'movie')
+    // TODO buscar del listado la primera que sea pelicula (media_type == 'movie').
     @GetMapping("/fetch_data")
     public ResponseEntity<Result> First_movie(@RequestParam String text) {
 
@@ -64,5 +64,5 @@ public class PeliculaController {
 
 }
 
-// TODO obtener los details de esa movie -> "https://api.themoviedb.org/3/movie/{{ id }}"
-// TODO devolver un objeto que tenga { id, name, overview }
+// TODO obtener los details de esa movie -> "https://api.themoviedb.org/3/movie/{{ id }}".
+// TODO devolver un objeto que tenga { id, name, overview }.
