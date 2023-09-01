@@ -1,4 +1,4 @@
-package com.testandres.repaso.controller.model;
+package com.testandres.repaso.model;
 
 import java.util.List;
 
