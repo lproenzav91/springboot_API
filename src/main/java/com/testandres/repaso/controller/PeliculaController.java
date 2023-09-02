@@ -33,17 +33,24 @@ public class PeliculaController {
         return builder;
     }
 
+    public UriComponentsBuilder movie_detail(int id) {
+        String apiUrl = "https://api.themoviedb.org/3/movie/";  // URL del API Movie_detail.
+
+        //  'api_key': '3e56846ee7cfb0b7d870484a9f66218c'
+        // 'query'
+        UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(apiUrl)
+                .queryParam("api_key", "3e56846ee7cfb0b7d870484a9f66218c")
+                .queryParam("movie_id", id);
+        return builder;
+    }
+
     // TODO buscar del listado la primera que sea pelicula (media_type == 'movie').
-    @GetMapping("/fetch_data")
-    public ResponseEntity<Result> First_movie(@RequestParam String text) {
-
+    @GetMapping("/first_movie")
+    public ResponseEntity<Result> First_Movie(@RequestParam String text) {
         UriComponentsBuilder builder = Api_movie(text);
-
         LinkedList<Result> lista_movie = new LinkedList<>();
-
         try {
             ResultResponse response = restTemplate.getForObject(builder.toUriString(), ResultResponse.class);
-
             if (response.getResults().isEmpty()) {
                 return ResponseEntity.notFound().build();
             } else {
@@ -54,7 +61,6 @@ public class PeliculaController {
                 }
                 return ResponseEntity.ok().body(lista_movie.getFirst());
             }
-
         } catch (RestClientException e) {
             return ResponseEntity.internalServerError().build();
         } catch (Exception e) {
@@ -62,7 +68,30 @@ public class PeliculaController {
         }
     }
 
+    // TODO obtener los details de una movie -> "https://api.themoviedb.org/3/movie/{{ id }}".
+    public UriComponentsBuilder Api_datail_movie(int id) {
+        String apiUrl = "https://api.themoviedb.org/3/movie/" + id;  // URL del API Movie.
+
+        //  'api_key': '3e56846ee7cfb0b7d870484a9f66218c'
+        // 'query'
+        UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(apiUrl)
+                .queryParam("api_key", "3e56846ee7cfb0b7d870484a9f66218c");
+        return builder;
+    }
+
+    @GetMapping("/movie_detail")
+    public ResponseEntity<Result> Movie_Detail(@RequestParam int id) {
+        UriComponentsBuilder builder = Api_datail_movie(id);
+        try {
+            Result response = restTemplate.getForObject(builder.toUriString(), Result.class);
+            return ResponseEntity.ok().body(response);
+        } catch (RestClientException e) {
+            return ResponseEntity.internalServerError().build();
+        }
+        
+    }
+
 }
 
-// TODO obtener los details de esa movie -> "https://api.themoviedb.org/3/movie/{{ id }}".
+
 // TODO devolver un objeto que tenga { id, name, overview }.
