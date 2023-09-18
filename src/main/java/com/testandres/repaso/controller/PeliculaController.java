@@ -3,7 +3,6 @@ package com.testandres.repaso.controller;
 import com.testandres.repaso.model.Result;
 import com.testandres.repaso.model.ResultResponse;
 import java.util.LinkedList;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
-import org.springframework.http.HttpStatus;
 
 @RestController
 @RequestMapping("/api")
